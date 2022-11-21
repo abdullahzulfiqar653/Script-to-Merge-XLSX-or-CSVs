@@ -14,7 +14,8 @@ files_dict_with_same_headers = get_files_with_same_headers(xlsx_files, files_dir
 for list_of_filenames in files_dict_with_same_headers:
     if len(list_of_filenames) > 1:
         headers, sheet = get_headers_and_sheet(files_directory_path, list_of_filenames[0])
-        workbook = xlsxwriter.Workbook(list_of_filenames[len(list_of_filenames)-1].split('.')[0]+"__MERGED.xlsx")
+        new_workbook_name = "{}__MERGED.xlsx".format(list_of_filenames[-1].split('.')[0])
+        workbook = xlsxwriter.Workbook(new_workbook_name)
         worksheet = workbook.add_worksheet()
 
         # adding headers in file
@@ -22,10 +23,11 @@ for list_of_filenames in files_dict_with_same_headers:
             worksheet.write(4, index, header)
 
         all_sheets_data = list()
-        starting_row = 5
+        starting_row = 5  #Starting row is 6 because 5th row contains headers 
+        print("____________________Starting Reading data____________________")
         for filename in list_of_filenames:
             _, sheet = get_headers_and_sheet(files_directory_path, filename)
-            print(filename)
+            print("____________________ Reading: {} ____________________".format(filename))
             for row in range(starting_row+1, sheet.max_row + starting_row + 1):
                 data_row = list()
                 for column in range(sheet.max_column):
@@ -33,7 +35,8 @@ for list_of_filenames in files_dict_with_same_headers:
                 if all(elem is None for elem in data_row):
                     continue
                 all_sheets_data.append(data_row)
-
+            
+        print("_______________ Writing data into {} _______________".format(new_workbook_name))
         for row in all_sheets_data:
             for index, value in enumerate(row):
                 worksheet.write(starting_row, index, value)
