@@ -2,15 +2,16 @@ import os
 import openpyxl
 
 def get_files(path):
-    list_of_files = os.listdir(path)
-    xlsx_files = csv_files = list()
-
-    for filename in list_of_files:
-        if "xlsx" in filename:
-            xlsx_files.append(filename)
-        if 'csv' in filename:
-            csv_files.append(filename)
-    
+    xlsx_files = list() 
+    csv_files = list()
+    for (root, _, files) in os.walk(path):
+        print(root)
+        for filename in files:
+            if filename.endswith('xlsx'):
+                xlsx_files.append("{}/{}".format(root, filename))
+            elif filename.endswith('csv'):
+                csv_files.append(filename)
+    print(xlsx_files, "-----")
     return xlsx_files, csv_files
 
 def get_files_with_same_headers(xlsx_files, files_directory):
@@ -21,7 +22,6 @@ def get_files_with_same_headers(xlsx_files, files_directory):
         if name_of_key not in columns_headers_sets:
             columns_headers_sets[name_of_key] = list()
         columns_headers_sets[name_of_key].append(filename)
-    
     return list(columns_headers_sets.values())
 
 def get_headers_and_sheet(files_directory, filename):
