@@ -30,11 +30,11 @@ for list_of_filenames in files_dict_with_same_headers:
                 data_row = list()
                 for column in range(sheet.max_column):
                     data_row.append(sheet.cell(row=row, column=column+1).value)
+                if all(elem is None for elem in data_row):
+                    continue
                 all_sheets_data.append(data_row)
 
-        print(len(all_sheets_data))
         for row in all_sheets_data:
-            print(row, "\n")
             for index, value in enumerate(row):
                 worksheet.write(starting_row, index, value)
             starting_row += 1
