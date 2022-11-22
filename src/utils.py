@@ -5,7 +5,6 @@ def get_files(path):
     xlsx_files = list() 
     csv_files = list()
     for (root, _, files) in os.walk(path):
-        print(root)
         for filename in files:
             if filename.endswith('xlsx'):
                 xlsx_files.append("{}\{}".format(str(root), filename))
