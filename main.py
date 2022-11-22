@@ -14,7 +14,7 @@ files_dict_with_same_headers = get_files_with_same_headers(xlsx_files)
 for listOfFileAdresses in files_dict_with_same_headers:
     if len(listOfFileAdresses) > 1:
         headers, sheet = get_headers_and_sheet(listOfFileAdresses[0])
-        new_workbook_name = "{}__MERGED.xlsx".format(listOfFileAdresses[-1].split('.')[0])
+        new_workbook_name = "{}__MERGED.xlsx".format(listOfFileAdresses[-1].split(".")[-2].split("\\")[-1])
         workbook = xlsxwriter.Workbook(new_workbook_name)
         worksheet = workbook.add_worksheet()
 
