@@ -10,23 +10,23 @@ files_directory_path = '..\samples'
 
 xlsx_files, csv_files = get_files(files_directory_path)
 files_dict_with_same_headers = get_files_with_same_headers(xlsx_files)
-
+print(files_dict_with_same_headers)
 for listOfFileAdresses in files_dict_with_same_headers:
     if len(listOfFileAdresses) > 1:
-        headers, sheet = get_headers_and_sheet(listOfFileAdresses[0])
+        headers, header_row, sheet = get_headers_and_sheet(listOfFileAdresses[0])
         new_workbook_name = "{}__MERGED.xlsx".format(listOfFileAdresses[-1].split(".")[-2].split("\\")[-1])
         workbook = xlsxwriter.Workbook(new_workbook_name)
         worksheet = workbook.add_worksheet()
 
         # adding headers in file
         for index, header in enumerate(headers):
-            worksheet.write(4, index, header)
+            worksheet.write(header_row, index, header)
 
         all_sheets_data = list()
         starting_row = 5  #Starting row is 6 because 5th row contains headers 
         print("____________________Starting Reading data____________________")
         for fileAddress in listOfFileAdresses:
-            _, sheet = get_headers_and_sheet(fileAddress)
+            _,_, sheet = get_headers_and_sheet(fileAddress)
             print("____________________ Reading: {} ____________________".format(fileAddress))
             for row in range(starting_row+1, sheet.max_row + starting_row + 1):
                 data_row = list()
