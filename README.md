@@ -19,6 +19,7 @@ Select interpreter from this path and activate the environment
 
 
 in the main.py there is an variable files_directory_path(directory in which your xlsx files are), give the exact path to that variable of directory.
+
 **Note:** If there is any subfolders in the directory and those directories contain xlsx files, this script will look for all the files there.
 
 
