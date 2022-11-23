@@ -20,10 +20,10 @@ for listOfFileAdresses in files_dict_with_same_headers:
 
         # adding headers in file
         for index, header in enumerate(headers):
-            worksheet.write(header_row, index, header)
+            worksheet.write(header_row-1, index, header)
 
         all_sheets_data = list()
-        starting_row = 5  #Starting row is 6 because 5th row contains headers 
+        starting_row = header_row  
         print("____________________Starting Reading data____________________")
         for fileAddress in listOfFileAdresses:
             _,_, sheet = get_headers_and_sheet(fileAddress)

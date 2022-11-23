@@ -28,7 +28,6 @@ def get_headers_and_sheet(fileAdress):
     headers_list = list()
     headers_row = 1
     for row in range(1, sheet_obj.max_row):
-        print(row, "   ", fileAdress)
         temp_headers_list = list()
         for column in range(1, sheet_obj.max_column+1):
             temp_headers_list.append(sheet_obj.cell(row = row, column = column).value)
