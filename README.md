@@ -26,6 +26,7 @@ in the main.py there is an variable files_directory_path(directory in which your
 **Run the Script through main.py**
 
 Make sure to activate the virtual environment
+
 ​use command:
 ```
 python main.py
